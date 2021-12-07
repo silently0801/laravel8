@@ -1,0 +1,241 @@
+#service_1 .section-title, #photowall .section-title {
+  font-size: 28px;
+}
+
+#business .section-title {
+  position: relative;
+  font-size: 28px;
+}
+
+#business .section-title::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 4px;
+  background-color: #515ed8;
+  display: block;
+  border-radius: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: #515ed8;
+}
+
+a:hover {
+  color: #6d7bf3;
+  text-decoration: none;
+}
+
+#service_1 .service_btn, #service_2 .service2_btn, #highlight_product .service_btn, #map .container .feedback .card-body .feedback_btn {
+  background-color: #515ed8;
+  color: #FFFFFF;
+}
+
+#service_1 .service_icon::before, #service_2 .service_icon::before {
+  content: '';
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  -webkit-transform: translate(-25%, -25%);
+          transform: translate(-25%, -25%);
+  background-color: rgba(59, 130, 246, 0.2);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+section {
+  padding: 96px 0;
+}
+
+.carousel-indicators li {
+  width: 7px;
+  height: 7px;
+  border-radius: 100%;
+  margin: 0 4px;
+  background-color: #000000;
+}
+
+.carousel-indicators .active {
+  background-color: #3b82f6;
+}
+
+#service_1 .container .service_top_block {
+  position: relative;
+}
+
+#service_1 .container .service_top_block .service-paragraph {
+  margin-bottom: 80px;
+}
+
+#service_1 .container .service_top_block .service-paragraph::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 70px;
+  height: 4px;
+  background-color: #515ed8;
+  border-radius: 5px;
+}
+
+#service_1 .service_icon::before {
+  width: 90px;
+  height: 90px;
+  -webkit-transform: translate(-23%, -22%);
+          transform: translate(-23%, -22%);
+}
+
+.my-img-size {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: 1px solid #000;
+}
+
+#business .business-block {
+  margin-top: 70px;
+}
+
+#business .business-block h3 {
+  font-size: 12px;
+  color: #515ed8;
+  margin-bottom: 0px;
+}
+
+#business .business-block h2 {
+  font-size: 20px;
+}
+
+#service_2 {
+  position: relative;
+}
+
+#service_2 .service_item_tbline {
+  padding: 50px 0;
+  margin: 50px 0;
+  border-top: 1px solid rgba(59, 62, 68, 0.2);
+  border-bottom: 1px solid rgba(59, 62, 68, 0.2);
+}
+
+#service_2 .service2_btn {
+  margin-top: 30px;
+}
+
+#service_2 .service_icon {
+  margin: 0 70px;
+}
+
+#highlight_product .card .comment .star {
+  color: #515ed8;
+}
+
+#highlight_product .card .comment .media {
+  border-left: 2px solid rgba(59, 62, 68, 0.2);
+}
+
+#highlight_product .color-label {
+  margin: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #aaa;
+}
+
+#highlight_product .color-label .color-radio {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+#highlight_product .thePrice {
+  font-size: 25px;
+}
+
+#highlight_product .like-btn {
+  padding: 0;
+}
+
+#highlight_product .like-btn i {
+  font-size: 35px;
+}
+
+#other_product .card-body h3 {
+  font-size: 10px;
+  color: #989899;
+}
+
+#other_product .card-body h2 {
+  font-size: 22px;
+  font-weight: 350;
+}
+
+#other_product .card-body p {
+  font-size: 17px;
+  color: #5b5b5c;
+}
+
+#map {
+  position: relative;
+  height: 850px;
+}
+
+#map .container {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+#map .container .feedback {
+  width: 40%;
+}
+
+#map .container .feedback .card-body .message_textarea {
+  resize: none;
+}
+
+#map .container .feedback .card-body p {
+  font-size: 10px;
+  color: #787879;
+}
+
+@media (max-width: 992px) {
+  #highlight_product img {
+    width: 100%;
+    height: 256px;
+  }
+}
+
+@media (max-width: 768px) {
+  #service_2 .service_item {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  #service_2 .service_item .service_textblock {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  #service_2 .service_mid_item {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+  }
+  #service_2 .service_mid_item .service_textblock {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  #map .container {
+    right: 0;
+  }
+  #map .container .feedback {
+    width: 100%;
+  }
+}
+/*# sourceMappingURL=index.css.map */

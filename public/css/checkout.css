@@ -1,0 +1,121 @@
+#cart {
+  background-color: #D1D5DB;
+}
+
+#cart .card-body h2 {
+  font-weight: 900;
+}
+
+#cart .card {
+  background-color: #F3F4F6;
+}
+
+#cart .card .progress-block {
+  border-bottom: 2px solid rgba(59, 62, 68, 0.2);
+}
+
+#cart .card .progress-block .progress {
+  top: 16px;
+  right: 0;
+  -webkit-transform: translateX(50%);
+          transform: translateX(50%);
+  width: 65%;
+  height: 10px;
+}
+
+#cart .card .progress-block .step {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+}
+
+#cart .card .progress-block .step.active {
+  background-color: #28A745;
+  color: #fff;
+}
+
+#cart .card .backToShop_btn:hover {
+  color: #0000008c;
+}
+
+#cart .card .backStep_btn {
+  background-color: #FFFFFF;
+  color: #3b82f6;
+  border: 2px solid #3b82f6;
+}
+
+#cart .card .backStep_btn:hover {
+  background-color: #2563eb;
+  color: #FFFFFF;
+}
+
+#cart .card .nextStep_btn {
+  background-color: #3b82f6;
+  color: #FFFFFF;
+}
+
+#cart .card .nextStep_btn:hover {
+  background-color: #2563eb;
+}
+
+#cart .card .order-item .order-item-info img {
+  border-radius: 50%;
+}
+
+#cart .card .order-item .order-item-info p {
+  margin: 0;
+}
+
+#cart .card .order-item .order-item-info span {
+  font-size: 10px;
+  color: #989899;
+}
+
+#cart .card .order-item .order-item-price input {
+  width: 25px;
+  border: 1px solid #989899;
+  border-radius: 5px;
+}
+
+#cart .card .order-item .order-item-price input::-webkit-outer-spin-button,
+#cart .card .order-item .order-item-price input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+#cart .card .order-item .order-item-price button {
+  border: none;
+}
+
+#cart .card .order-item .order-item-price span {
+  font-size: 12px;
+  margin-left: 20px;
+}
+
+#cart .card .count, #cart .card .subtotal, #cart .card .freight, #cart .card .total {
+  color: #aaaaac;
+}
+
+#cart .card .count_price, #cart .card .subtotal_price, #cart .card .freight_fee, #cart .card .total_price {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+#cart .card .paymentMethod_form-group div {
+  font-size: 20px;
+}
+
+#cart .card .order-item-price span.order-item_count {
+  font-size: 20px;
+}
+
+#cart .card .send_information label {
+  width: 50px;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+#cart .card .send_information .infor_text {
+  font-size: 20px;
+}
+/*# sourceMappingURL=checkout.css.map */
