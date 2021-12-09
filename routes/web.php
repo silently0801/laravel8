@@ -18,5 +18,6 @@ Route::get('/',[FrontController::class,'index']);
 
 Route::get('/hello',[FrontController::class,'hello']);
 
+Route::get('/news',[FrontController::class,'news']);
 
-
+Route::get('/news/{id}',[FrontController::class,'newsContent']);

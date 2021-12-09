@@ -1,0 +1,93 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    font-size: 18px;
+}
+.container{
+    width: 100%;
+    max-width: 1400px;
+}
+@media(max-width:1460px){
+    .container{
+        padding: 0 30px;
+    }
+}
+.header{
+    border-bottom: 1px solid #c8c8c8;
+    padding-bottom: 10px;
+}
+.header>.title{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.header>.title>img{
+    width: 75px;    
+    height: 75px;
+    margin-bottom: 10px;
+}
+.header>.title>h2{
+    font-size: 34px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.page-info{
+    display: flex;
+    justify-content: flex-end;
+}
+.calc{
+    padding: 0 15px;
+}
+.calc>span{
+    color: #db3b00;
+}
+.news-card{
+    padding: 40px 20px;
+    display: flex;
+    border: 0px;
+    border-bottom: 1px solid #c8c8c8;
+}
+.news-card>.img{
+    width: 25vw;
+    height: 16.7vw;
+    background-size: cover;
+    background-position: center;
+    background-color: aquamarine;
+}
+.news-card>.content{
+    padding-left: 30px;
+    flex: 1;
+}
+.news-card>.content>.tag{
+    display: inline-block;
+    padding: 3px 20px;
+    background-color: #A44CC4;
+    color: #FFF;
+    margin-bottom: 35px;
+}
+.news-card>.content>a{
+    display: flex;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #000;
+    text-decoration: none;
+}
+.news-card>.content>a:hover{
+    color: #DB3B00;
+}
+.news-card>.content>.date{
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 600;
+    color: #DB3B00;
+    margin-bottom: 10px;
+}
+.news-card>.content>p{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;   /*省略第n行後的文字*/
+    -webkit-box-orient: vertical;  /*設定元素是垂直布局*/
+}
