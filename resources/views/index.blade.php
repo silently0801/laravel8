@@ -509,15 +509,19 @@
     <div class="container">
         <div class="card ml-auto feedback">
             <div class="card-body">
-                <form action="">
-                    <h5 class="card-title">Feedback</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Post-ironic portland shabby chic echo park, banjo
-                        fashion axe</h6>
+                <form action="{{asset('/contact')}}" method="POST">
+                    @csrf
+                    <h5 class="card-title">聯絡我們</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">如果您對全聯公司有任何的建議或批評，我們非常歡迎您能來信指教。</h6>
                     <div class="my-4">
-                        <label for="Email" class="form-label">Email</label>
-                        <input type="text" class="form-control mb-3" id="Email" aria-describedby="basic-addon3">
-                        <label for="Message" class="form-label">Message</label>
-                        <textarea type="text" rows="4" class="form-control message_textarea" id="Message"
+                        <label for="name" class="form-label">姓名</label>
+                        <input type="text" class="form-control mb-3" id="name" name="name" aria-describedby="basic-addon3">
+                        <label for="phone" class="form-label">電話</label>
+                        <input type="text" class="form-control mb-3" id="phone" name="phone" aria-describedby="basic-addon3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" class="form-control mb-3" id="email" name="email" aria-describedby="basic-addon3">
+                        <label for="content" class="form-label">Message</label>
+                        <textarea type="text" rows="4" class="form-control message_textarea" name="content" id="content"
                             aria-describedby="basic-addon3"></textarea>
                     </div>
                     <button type="submit" class="btn w-100 px-4 feedback_btn">Button</button>
