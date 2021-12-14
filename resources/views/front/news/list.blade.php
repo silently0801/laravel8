@@ -31,7 +31,7 @@
         <div class="img" style="background-image: url({{$item->image_url}})"></div>
         <div class="content">
             <span class="tag">最新消息</span>
-            <a href="/news/{{$item->id}}">{{$item->title}}</a>
+            <a href="{{asset('/news/'.$item->id)}}">{{$item->title}}</a>
             <span class="date">{{$item->date}}</span>
             <p>{{$item->content}}</p>
         </div>
