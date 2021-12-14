@@ -17,19 +17,13 @@ use App\Http\Controllers\FrontController;
 
 Route::get('/',[FrontController::class,'index']);
 
-Route::get('/hello',[FrontController::class,'hello']);
+// Route::get('/news',[FrontController::class,'newsList']);
+// Route::get('/news/{id}',[FrontController::class,'newsContent']);
 
-Route::get('/news',[FrontController::class,'news']);
-
-Route::get('/news/{id}',[FrontController::class,'newsContent']);
-
-Route::get('/create-news',[FrontController::class,'createNews']);
-
-Route::post('/store-news',[FrontController::class,'storeNews']);
-
-Route::get('/update-news/{id}',[FrontController::class,'updateNews']);
-
-Route::get('/destroy-news/{id}',[FrontController::class,'destroyNews']);
+Route::prefix('/news')->group(function (){
+    Route::get('/',[FrontController::class,'newsList']);
+    Route::get('/{id}',[FrontController::class,'newsContent']);
+});
 
 Route::post('/contact',[FrontController::class,'contact']);
 
