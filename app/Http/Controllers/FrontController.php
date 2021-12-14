@@ -13,7 +13,7 @@ class FrontController extends Controller
     //
     public function index()
     {
-        return view('index');
+        return view('welcome');
     }
 
     public function hello()
@@ -47,14 +47,21 @@ class FrontController extends Controller
     }
     public function createNews()
     {
-        News::create([
-            'title'=>'11111交通部觀光局呼籲旅宿業者協力抗漲',
-            'date'=>'2021-12-10',
-            'content'=>'1111因應近期各界關切物價，行政院積極穩定國內民生消費物品市場。',
-            'image_url'=>'https://www.taiwan.net.tw/pic.ashx?qp=/0042228/13_0042228_2.jpg&sizetype=2'
-        ]);
+        return view('news-create');
+    }
+
+    public function storeNews(Request $request)
+    {
+        // News::create([
+        //     'title' => $request->title,
+        //     'date' => $request->date,
+        //     'image_url' => $request->image_url,
+        //     'content' => $request->content,
+        // ]);
+
+        News::create($request->all());
         
-        return 'create success';
+        return redirect('/news');
     }
 
     public function updateNews($id)
