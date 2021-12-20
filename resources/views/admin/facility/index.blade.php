@@ -36,9 +36,9 @@
                                 <td>{{$facility->title}}</td>
                                 <td><img src="{{Storage::url($facility->image_url)}}" alt="" width="200"></td>
                                 <td>
-                                    <a href="" class="btn btn-primary">編輯</a>
+                                    <a href="{{route('facility.edit',['id'=>$facility->id])}}" class="btn btn-primary">編輯</a>
                                     <button class="btn btn-danger delete-btn">刪除</button>
-                                    <form class="d-none" action="" method="post">
+                                    <form class="d-none" action="{{route('facility.destroy',['id'=>$facility->id])}}" method="post">
                                         @csrf
                                         @method('DELETE')
                                     </form>
@@ -56,8 +56,6 @@
 @endsection
 
 @section('js')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script>
     // 初始化datatable

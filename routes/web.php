@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ToolboxController;
 use App\Models\Facility;
 use App\Models\News;
 
@@ -51,5 +52,11 @@ Route::prefix('/admin')->middleware(['auth'])->group(function () {
         Route::get('/', [FacilityController::class, 'index'])->name('facility.index');
         Route::get('/create', [FacilityController::class, 'create'])->name('facility.create');
         Route::post('/', [FacilityController::class, 'store'])->name('facility.store');
+        Route::get('/{id}/edit',[FacilityController::class,'edit'])->name('facility.edit');
+        Route::patch('/{id}',[FacilityController::class,'update'])->name('facility.update');
+        Route::delete('/{id}',[FacilityController::class,'destroy'])->name('facility.destroy');
     });
+
+    // 上傳圖片
+    Route::post('/image-upload',[ToolboxController::class,'imageUpload'])->name('tool.image_upload');
 });
