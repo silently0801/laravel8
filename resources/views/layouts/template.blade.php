@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
 
+    {!! htmlScriptTagJsApi() !!}
     <!-- bootstrap Core CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <!-- font-awesom Core CSS -->
@@ -34,10 +35,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item d-flex justify-content-center">
-                        <a class="nav-link" href="{{asset('/news')}}">News</a>
+                        <a class="nav-link" href="{{route('news.list')}}">News</a>
                     </li>
                     <li class="nav-item d-flex justify-content-center">
-                        <a class="nav-link" href="{{asset('/create-news')}}">News-create</a>
+                        <a class="nav-link" href="{{route('facility')}}">Facility</a>
                     </li>
                     <li class="nav-item d-flex justify-content-center">
                         <a class="nav-link" href="#">About</a>

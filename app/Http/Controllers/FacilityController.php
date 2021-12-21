@@ -43,11 +43,13 @@ class FacilityController extends Controller
         // $path 可以得到相對於local(storage/app/public)資料夾的路徑
         $path = Storage::put('/', $request->image_url);
 
-        Facility::create([
+        $facility = Facility::create([
             'title' => $request->title,
             'content' => $request->content,
             'image_url' => $path
         ]);
+
+        dd($facility);
 
         return redirect()->route('facility.index');
     }

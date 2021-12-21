@@ -4,13 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use App\Models\Contact;
+use App\Models\Facility;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class FrontController extends Controller
 {
     public function index()
     {
         return view('index');
+    }
+
+    public function contact(Request $request)
+    {
+        $validated = $request->validate([
+            'g-recaptcha-response' => 'recaptcha',
+            recaptchaFieldName() => recaptchaRuleName()
+        ]);
+        
+        Contact::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'content' => $request->content,
+        ]);
+        
+        return redirect()->route('index');
     }
 
     public function newsList()
@@ -26,16 +45,12 @@ class FrontController extends Controller
         
         return view('front.news.content',compact('news'));
     }
-    
-    public function contact(Request $request)
+
+    public function facility()
     {
-        Contact::create([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'content' => $request->content,
-        ]);
-        
-        return redirect('/news');
+        $facilities = Facility::get();
+
+        return view('front.facility.index',compact('facilities'));
     }
+    
 }
