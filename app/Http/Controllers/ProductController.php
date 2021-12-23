@@ -140,7 +140,22 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        // 刪除主要圖片檔案
+        Storage::delete($product->image_url);
+        // 尋找其他圖片
+        $productImages = ProductImage::where('product_id',$product->id)->get();
+        // 利用迴圈將每一張圖片刪除
+        foreach ($productImages as $productImage) {
+            // 刪除其他圖片檔案
+            Storage::delete($productImage->image_url);
+            // 刪除圖片資料
+            $productImage->delete();
+        }
+        // 刪除產品資料
+        $product->delete();
+
+        return redirect()->route('products.index');
     }
 
     public function imageDelete(Request $request)

@@ -132,7 +132,9 @@
             let imageId = e.target.getAttribute('data-id');
             // 利用JS建立表單
             let formData = new FormData();
+            // @csrf
             formData.append('_token','{{csrf_token()}}');
+            // @method('delete')
             formData.append('_method','delete');
             formData.append('id',imageId);
 

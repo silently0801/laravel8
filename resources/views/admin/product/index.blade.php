@@ -39,7 +39,7 @@
                                     <td>
                                         <a href="{{route('products.edit',['product'=>$product->id])}}" class="btn btn-primary">編輯</a>
                                         <button class="btn btn-danger delete-btn">刪除</button>
-                                        <form class="d-none" action="" method="post">
+                                        <form class="d-none" action="{{route('products.destroy',['product'=>$product->id])}}" method="post">
                                             @csrf
                                             @method('DELETE')
                                         </form>
