@@ -17,7 +17,7 @@
             <div class="card">
                 <h2 class="card-header lh-1 pt-3 pb-2">產品管理</h2>
                 <div class="form-group pt-4 px-3 m-0">
-                    <a href="" class="btn btn-success">新增產品</a>
+                    <a href="{{route('products.create')}}" class="btn btn-success">新增產品</a>
                 </div>
                 <hr>
                 <div class="card-body">
@@ -35,9 +35,9 @@
                                 <tr>
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->price}}</td>
-                                    <td><img src="{{$product->image_url}}" alt="" width="200"></td>
+                                    <td><img src="{{Storage::url($product->image_url)}}" alt="" width="200"></td>
                                     <td>
-                                        <a href="" class="btn btn-primary">編輯</a>
+                                        <a href="{{route('products.edit',['product'=>$product->id])}}" class="btn btn-primary">編輯</a>
                                         <button class="btn btn-danger delete-btn">刪除</button>
                                         <form class="d-none" action="" method="post">
                                             @csrf

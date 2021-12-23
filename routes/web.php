@@ -62,8 +62,8 @@ Route::prefix('/admin')->middleware(['auth'])->group(function () {
     });
 
     // 產品
-    Route::resource('product',ProductController::class);
-
+    Route::resource('/products',ProductController::class);
+    Route::delete('/product-image',[ProductController::class,'imageDelete'])->name('product.image_delete');
     // 上傳圖片
     Route::post('/image-upload',[ToolboxController::class,'imageUpload'])->name('tool.image_upload');
 });
