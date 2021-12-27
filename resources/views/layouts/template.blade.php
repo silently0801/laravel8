@@ -8,8 +8,7 @@
     <title>@yield('title')</title>
 
     {!! htmlScriptTagJsApi() !!}
-    <!-- bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <!-- font-awesom Core CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
@@ -28,12 +27,12 @@
             <a class="navbar-brand" href="{{asset('/')}}">
                 <img src="{{asset('images/logo.svg')}}" width="106" alt="">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
+            <div class="collapse navbar-collapse justify-content-end d-flex" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto ">
                     <li class="nav-item d-flex justify-content-center">
                         <a class="nav-link" href="{{route('news.list')}}">News</a>
                     </li>
@@ -41,7 +40,7 @@
                         <a class="nav-link" href="{{route('facility')}}">Facility</a>
                     </li>
                     <li class="nav-item d-flex justify-content-center">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="{{route('product.list')}}">Product</a>
                     </li>
                     <li class="nav-item d-flex justify-content-center">
                         <a class="nav-link" href="#">Contact</a>
@@ -132,18 +131,7 @@
         </div>
     </footer>
 
-    <!-- jQuery JS CDN -->
-    <!-- 通常jQuery都會放在最上面 -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <!-- popper JS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-        crossorigin="anonymous"></script>
-    <!-- bootstrap Core JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
-    
+    <script src="{{asset('js/app.js')}}"></script>
     @yield('js')
 </body>
 </html>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\News;
 use App\Models\Contact;
 use App\Models\Facility;
+use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -53,4 +55,18 @@ class FrontController extends Controller
         return view('front.facility.index',compact('facilities'));
     }
     
+    public function productList()
+    {
+        $products = Product::get();
+
+        return view('front.product.list',compact('products'));
+    }
+
+    public function productContent($id)
+    {
+        $product = Product::find($id);
+        $productImages = ProductImage::where('product_id',$product->id)->get();
+
+        return view('front.product.content',compact('product','productImages'));
+    }
 }

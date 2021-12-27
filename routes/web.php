@@ -26,18 +26,22 @@ use App\Models\Product;
 Route::get('/', [FrontController::class, 'index'])->name('index');
 
 Route::post('/contact', [FrontController::class, 'contact']);
-
+// 最新消息
 Route::prefix('/news')->group(function () {
     Route::get('/', [FrontController::class, 'newsList'])->name('news.list');
     Route::get('/{id}', [FrontController::class, 'newsContent'])->name('news.content');
 });
-
+// 設施介紹
 Route::get('/facility',[FrontController::class,'facility'])->name('facility');
+// 產品
+Route::prefix('/product')->group(function (){
+    Route::get('/',[FrontController::class,'productList'])->name('product.list');
+    Route::get('/{id}',[FrontController::class,'productContent'])->name('product.content');
+});
+
 
 Auth::routes();
-
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
 // 後台
 Route::prefix('/admin')->middleware(['auth'])->group(function () {
     // 最新消息
