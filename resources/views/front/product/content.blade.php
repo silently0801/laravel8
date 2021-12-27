@@ -25,7 +25,7 @@
                                 <div class="swiper-slide">
                                     <img src="{{Storage::url($product->image_url)}}" />
                                 </div>
-                                @foreach ($productImages as $productImage)
+                                @foreach ($product->productImages as $productImage)
                                 <div class="swiper-slide">
                                     <img src="{{Storage::url($productImage->image_url)}}" />
                                 </div>
@@ -39,7 +39,7 @@
                                 <div class="swiper-slide">
                                     <img src="{{Storage::url($product->image_url)}}" />
                                 </div>
-                                @foreach ($productImages as $productImage)
+                                @foreach ($product->productImages as $productImage)
                                 <div class="swiper-slide">
                                     <img src="{{Storage::url($productImage->image_url)}}" />
                                 </div>

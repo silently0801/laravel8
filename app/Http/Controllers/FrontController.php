@@ -64,9 +64,8 @@ class FrontController extends Controller
 
     public function productContent($id)
     {
-        $product = Product::find($id);
-        $productImages = ProductImage::where('product_id',$product->id)->get();
+        $product = Product::with('productImages')->find($id);
 
-        return view('front.product.content',compact('product','productImages'));
+        return view('front.product.content',compact('product'));
     }
 }

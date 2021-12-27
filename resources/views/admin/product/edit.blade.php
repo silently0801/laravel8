@@ -86,10 +86,10 @@
                         <div class="form-group row py-2">
                             <label for="image-urls" class="col-sm-2 col-form-label">其他圖片</label>
                             <div class="col-sm-10 row">
-                                @foreach ($product_images as $product_image)
+                                @foreach ($product->productImages as $productImage)
                                 <div class="img"
-                                    style="background-image: url({{Storage::url($product_image->image_url)}})">
-                                    <div class="delete-btn" data-id="{{$product_image->id}}">X</div>
+                                    style="background-image: url({{Storage::url($productImage->image_url)}})">
+                                    <div class="delete-btn" data-id="{{$productImage->id}}">X</div>
                                 </div>
                                 @endforeach
                             </div>
@@ -139,7 +139,7 @@
             formData.append('id',imageId);
 
             // 送出請求至後端刪除檔案及資料
-            let url = '{{route('product.image_delete')}}';
+            let url = '{{route('product.image-delete')}}';
             fetch(url,{
                 'method':'post',
                 'body':formData

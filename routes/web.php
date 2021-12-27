@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\FacilityController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\FrontController;
-use App\Http\Controllers\NewsController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ToolboxController;
-use App\Models\Facility;
 use App\Models\News;
 use App\Models\Product;
+use App\Models\Facility;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\FrontController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ToolboxController;
+use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\ProductCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,8 +67,12 @@ Route::prefix('/admin')->middleware(['auth'])->group(function () {
     });
 
     // 產品
+    // 產品類別管理
+    Route::resource('/product-categories',ProductCategoryController::class);
+    // 產品管理
     Route::resource('/products',ProductController::class);
-    Route::delete('/product-image',[ProductController::class,'imageDelete'])->name('product.image_delete');
+    Route::delete('/product-image',[ProductController::class,'imageDelete'])->name('product.image-delete');
+
     // 上傳圖片
-    Route::post('/image-upload',[ToolboxController::class,'imageUpload'])->name('tool.image_upload');
+    Route::post('/image-upload',[ToolboxController::class,'imageUpload'])->name('tool.image-upload');
 });

@@ -68,7 +68,7 @@
                    
                     console.log(files);
                     // 圖片要發送到後端的路徑
-                    let url = '{{route('tool.image_upload')}}';
+                    let url = '{{route('tool.image-upload')}}';
                     // 利用JS建立一個form表單
                     let formData = new FormData();
                     // formData.append(key,value);

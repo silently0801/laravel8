@@ -40,13 +40,18 @@
                         
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('news.index')}}">最新消息管理</a>
+                                <a class="nav-link" href="{{route('news.index')}}">最新消息</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('facility.index')}}">設施介紹管理</a>
+                                <a class="nav-link" href="{{route('facility.index')}}">設施介紹</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{route('products.index')}}">產品管理</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" href="#">產品</a>
+  
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{route('product-categories.index')}}">產品類別管理</a>
+                                    <a class="dropdown-item" href="{{route('products.index')}}">產品管理</a>
+                                </div>
                             </li>
                         @endguest
                     </ul>
@@ -91,6 +96,13 @@
         </nav>
 
         <main class="py-4">
+            @if (session('message'))
+            <div class="container">
+                <div class="alert {{session('color')}}" role="alert">
+                    {{session('message')}}
+                </div>
+            </div>
+            @endif
             @yield('content')
             @yield('main')
         </main>

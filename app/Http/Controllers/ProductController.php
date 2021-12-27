@@ -84,10 +84,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
-        $product_images = ProductImage::where('product_id', $product->id)->get();
+        $product = Product::with('productImages')->find($id);
 
-        return view('admin.product.edit', compact('product', 'product_images'));
+        return view('admin.product.edit', compact('product'));
     }
 
     /**
@@ -140,13 +139,12 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::find($id);
+        $product = Product::with('productImages')->find($id);
         // 刪除主要圖片檔案
         Storage::delete($product->image_url);
-        // 尋找其他圖片
-        $productImages = ProductImage::where('product_id',$product->id)->get();
+        
         // 利用迴圈將每一張圖片刪除
-        foreach ($productImages as $productImage) {
+        foreach ($product->productImages as $productImage) {
             // 刪除其他圖片檔案
             Storage::delete($productImage->image_url);
             // 刪除圖片資料
