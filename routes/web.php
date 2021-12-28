@@ -11,6 +11,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ToolboxController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\StoreAreaController;
+use App\Http\Controllers\StoreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +74,14 @@ Route::prefix('/admin')->middleware(['auth'])->group(function () {
     // 產品管理
     Route::resource('/products',ProductController::class);
     Route::delete('/product-image',[ProductController::class,'imageDelete'])->name('product.image-delete');
+
+    // 銷售據點
+    // 區域管理
+    Route::resource('/store-areas',StoreAreaController::class);
+    // 門市管理
+    Route::resource('/stores',StoreController::class);
+    
+
 
     // 上傳圖片
     Route::post('/image-upload',[ToolboxController::class,'imageUpload'])->name('tool.image-upload');

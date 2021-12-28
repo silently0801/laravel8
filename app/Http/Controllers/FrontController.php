@@ -6,9 +6,11 @@ use App\Models\News;
 use App\Models\Contact;
 use App\Models\Product;
 use App\Models\Facility;
+use App\Mail\ContactNotify;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class FrontController extends Controller
@@ -25,12 +27,14 @@ class FrontController extends Controller
             recaptchaFieldName() => recaptchaRuleName()
         ]);
         
-        Contact::create([
+        $contact = Contact::create([
             'name' => $request->name,
             'phone' => $request->phone,
             'email' => $request->email,
             'content' => $request->content,
         ]);
+
+        Mail::to($contact->email)->send(new ContactNotify());
         
         return redirect()->route('index');
     }

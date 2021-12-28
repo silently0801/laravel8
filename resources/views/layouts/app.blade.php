@@ -53,6 +53,14 @@
                                     <a class="dropdown-item" href="{{route('products.index')}}">產品管理</a>
                                 </div>
                             </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" href="#">銷售據點</a>
+  
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{route('store-areas.index')}}">區域管理</a>
+                                    <a class="dropdown-item" href="{{route('stores.index')}}">門市管理</a>
+                                </div>
+                            </li>
                         @endguest
                     </ul>
 
