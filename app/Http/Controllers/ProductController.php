@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::get();
+        $products = Product::with('productCategory')->orderBy('created_at', 'desc')->get();
 
         return view('admin.product.index', compact('products'));
     }
@@ -28,7 +29,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create');
+        $productCategories = ProductCategory::get();
+        return view('admin.product.create', compact('productCategories'));
     }
 
     /**
@@ -45,6 +47,7 @@ class ProductController extends Controller
         }
         // 建立產品
         $product = Product::create([
+            'product_category_id' => $request->product_category_id,
             'name' => $request->name,
             'price' => $request->price,
             'image_url' => $path,
@@ -84,9 +87,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        $productCategories = ProductCategory::get();
         $product = Product::with('productImages')->find($id);
 
-        return view('admin.product.edit', compact('product'));
+        return view('admin.product.edit', compact('productCategories', 'product'));
     }
 
     /**
@@ -111,13 +115,14 @@ class ProductController extends Controller
         }
         // 更新產品資料
         $product->update([
+            'product_category_id' => $request->product_category_id,
             'name' => $request->name,
             'price' => $request->price,
             'image_url' => $path,
             'description' => $request->description,
         ]);
         // 判斷是否有上傳新的其他圖片
-        if($request->hasFile('image_urls')){
+        if ($request->hasFile('image_urls')) {
             foreach ($request->image_urls as $image_url) {
                 $path = Storage::put('/product', $image_url);
 
@@ -142,7 +147,7 @@ class ProductController extends Controller
         $product = Product::with('productImages')->find($id);
         // 刪除主要圖片檔案
         Storage::delete($product->image_url);
-        
+
         // 利用迴圈將每一張圖片刪除
         foreach ($product->productImages as $productImage) {
             // 刪除其他圖片檔案

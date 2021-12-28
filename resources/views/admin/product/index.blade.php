@@ -24,6 +24,7 @@
                     <table id="my-table" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr>
+                                <th>類別</th>
                                 <th>名稱</th>
                                 <th>價格</th>
                                 <th width="250">主要圖片</th>
@@ -33,6 +34,7 @@
                         <tbody>
                             @foreach ($products as $product)
                                 <tr>
+                                    <td>{{$product->productCategory->name}}</td>
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->price}}</td>
                                     <td><img src="{{Storage::url($product->image_url)}}" alt="" width="200"></td>

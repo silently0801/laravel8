@@ -11,9 +11,10 @@
         <h2>產品列表</h2>
     </div>
     <div class="tabs">
-        <div class="tab">紅茶</div>
-        <div class="tab">綠茶</div>
-        <div class="tab">奶茶</div>
+        <a href="{{route('product.list','category_id=0')}}" class="tab">所有</a>
+        @foreach ($productCategories as $productCategory)
+        <a href="{{route('product.list','category_id='.$productCategory->id)}}" class="tab">{{$productCategory->name}}</a>
+        @endforeach
     </div>
 
 </header>
@@ -22,7 +23,7 @@
     <div class="container">
         <div class="row cards">
             @foreach ($products as $product)
-            <a href="{{route('product.content',['id' => $product->id])}}" class="col-12 col-sm-6 col-lg-3">
+            <a href="{{route('product.content',['id' => $product->id])}}" class="col-12 col-sm-6 col-lg-3 product-card">
                 <div class="card pb-3 mb-3">
                     <div class="card-img-top mb-2 img-container">
                         <img src="{{Storage::url($product->image_url)}}" alt="...">

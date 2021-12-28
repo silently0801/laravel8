@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use App\Models\Contact;
-use App\Models\Facility;
 use App\Models\Product;
+use App\Models\Facility;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Validator;
 
 class FrontController extends Controller
@@ -55,11 +56,17 @@ class FrontController extends Controller
         return view('front.facility.index',compact('facilities'));
     }
     
-    public function productList()
+    public function productList(Request $request)
     {
-        $products = Product::get();
+        $productCategories = ProductCategory::get();
 
-        return view('front.product.list',compact('products'));
+        if($request->category_id){
+            $products = Product::where('product_category_id',$request->category_id)->get();
+        }else{
+            $products = Product::get();
+        }
+
+        return view('front.product.list',compact('productCategories','products'));
     }
 
     public function productContent($id)

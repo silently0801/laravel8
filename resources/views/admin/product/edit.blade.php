@@ -53,6 +53,17 @@
                         @csrf
                         @method('PATCH')
                         <div class="form-group row py-2">
+                            <label for="category" class="col-sm-2 col-form-label">類別<span class="text-danger">*</span></label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="product_category_id" id="category" required>
+                                    <option value="" hidden>請選擇類別</option>
+                                    @foreach ($productCategories as $productCategory)
+                                    <option value="{{$productCategory->id}}" @if($productCategory->id == $product->product_category_id)selected @endif>{{$productCategory->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row py-2">
                             <label for="name" class="col-sm-2 col-form-label">名稱<span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-10">
