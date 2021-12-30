@@ -34,7 +34,7 @@ class FrontController extends Controller
             'content' => $request->content,
         ]);
 
-        Mail::to($contact->email)->send(new ContactNotify());
+        Mail::to($contact->email)->send(new ContactNotify($contact));
         
         return redirect()->route('index');
     }

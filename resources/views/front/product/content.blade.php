@@ -59,10 +59,10 @@
                             <span class="price">${{$product->price}}</span>
                             <div class="qty-setting">
                                 <div class="minus">-</div>
-                                <input class="qty" type="text" min="1" value="1">
+                                <input class="qty" type="text" min="1" value="1" readonly>
                                 <div class="plus">+</div>
                             </div>
-                            <button type="submit" class="btn btn-m px-3 ml-auto add-cart">加入購物車</button>
+                            <button data-id="{{$product->id}}" class="btn btn-m px-3 ml-auto add-cart">加入購物車</button>
                         </div>
                     </div>
                 </div>
@@ -96,6 +96,38 @@
         thumbs: {
             swiper: swiper,
         },
+    });
+
+    const plusElement = document.querySelector('.plus');
+    const minusElement = document.querySelector('.minus');
+    const inputElement = document.querySelector('.qty');
+    const addCartElement = document.querySelector('.add-cart');
+    plusElement.addEventListener('click',function () {
+        inputElement.value = Number(inputElement.value) + 1 ;
+    });
+    minusElement.addEventListener('click',function () {
+        if(inputElement.value > 1){
+            inputElement.value = Number(inputElement.value) - 1 ;
+        }
+    });
+    addCartElement.addEventListener('click',function () {
+        let productId = this.getAttribute('data-id');
+        let qty = inputElement.value;
+        let formData = new FormData();
+        formData.append('_token','{{csrf_token()}}');
+        formData.append('id',productId);
+        formData.append('qty',qty);
+        let url = '{{route('shopping-cart.add')}}';
+        fetch(url,{
+            'method':'post',
+            'body':formData
+        }).then(function (response) {
+            return response.text();
+        }).then(function (data) {
+            if(data == 'success'){
+                alert('加入成功');
+            }
+        });
     });
 </script>
 @endsection

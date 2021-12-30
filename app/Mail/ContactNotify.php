@@ -10,15 +10,14 @@ use Illuminate\Queue\SerializesModels;
 class ContactNotify extends Mailable
 {
     use Queueable, SerializesModels;
-
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($contact)
     {
-        //
+        $this->contact = $contact;
     }
 
     /**
@@ -28,6 +27,6 @@ class ContactNotify extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.contact');
+        return $this->view('emails.contact',['contact'=>$this->contact]);
     }
 }

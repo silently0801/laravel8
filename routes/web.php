@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ToolboxController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\StoreAreaController;
 use App\Http\Controllers\StoreController;
 
@@ -41,7 +42,15 @@ Route::prefix('/product')->group(function (){
     Route::get('/',[FrontController::class,'productList'])->name('product.list');
     Route::get('/{id}',[FrontController::class,'productContent'])->name('product.content');
 });
+// 購物車
+Route::prefix('/shopping-cart')->group(function ()
+{
+    Route::post('/add',[ShoppingCartController::class,'add'])->name('shopping-cart.add');
+    Route::get('/content',[ShoppingCartController::class,'content']);
+    Route::get('/clear',[ShoppingCartController::class,'clear']);
 
+    Route::get('/step01',[ShoppingCartController::class,'step01'])->name('shopping-cart.step01');
+});
 
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -81,8 +90,6 @@ Route::prefix('/admin')->middleware(['auth'])->group(function () {
     // 門市管理
     Route::resource('/stores',StoreController::class);
     
-
-
     // 上傳圖片
     Route::post('/image-upload',[ToolboxController::class,'imageUpload'])->name('tool.image-upload');
 });
