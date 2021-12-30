@@ -18,8 +18,12 @@
     .order-item-price>span{
         display: inline-block;
         text-align: end;
-        min-width: 70px;
+        min-width: 100px;
         font-size: 18px !important;
+    }
+    .order-item-price>.qty{
+        width: 65px !important;
+        text-align: center;
     }
 </style>
 @endsection
@@ -125,7 +129,7 @@
         let price = priceElement.getAttribute('data-single');
         let qty = qtyElement.value;
         let total = price * qty;
-        priceElement.textContent = `\$${total}`;
+        priceElement.textContent = `\$${total.toLocaleString()}`;
     }
     const minusElements = document.querySelectorAll('.minus');
     const plusElements = document.querySelectorAll('.plus');
