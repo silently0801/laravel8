@@ -105,9 +105,9 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-between mt-4 pt-4">
-                        <a href="./index.html" class="btn px-5 backToShop_btn"><i
-                                class="fas fa-arrow-left"></i>&nbsp;&nbsp;返回購物</a>
-                        <a href="./checkout2.html" class="btn btn-lg px-5 nextStep_btn">下一步</a>
+                        <a href="{{route('product.list')}}" class="btn px-5 backToShop_btn"><i
+                                class="fas fa-arrow-left"></i>返回購物</a>
+                        <a href="{{route('shopping-cart.step02')}}" class="btn btn-lg px-5 nextStep_btn">下一步</a>
                     </div>
                 </div>
             </div>

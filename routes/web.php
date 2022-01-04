@@ -52,6 +52,8 @@ Route::prefix('/shopping-cart')->group(function ()
     Route::get('/clear',[ShoppingCartController::class,'clear']);
 
     Route::get('/step01',[ShoppingCartController::class,'step01'])->name('shopping-cart.step01');
+    Route::get('/step02',[ShoppingCartController::class,'step02'])->name('shopping-cart.step02');
+
 });
 
 Auth::routes();

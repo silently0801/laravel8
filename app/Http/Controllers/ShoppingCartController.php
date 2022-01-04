@@ -61,4 +61,8 @@ class ShoppingCartController extends Controller
         
         return view('front.shopping-cart.step01',compact('items'));
     }
+    public function step02()
+    {   
+        return view('front.shopping-cart.step02');
+    }
 }
