@@ -57,7 +57,8 @@ class ShoppingCartController extends Controller
 
     public function step01()
     {   
-        $items = \Cart::getContent();
+        $items = \Cart::getContent()->sortBy('id');
+        
         return view('front.shopping-cart.step01',compact('items'));
     }
 }

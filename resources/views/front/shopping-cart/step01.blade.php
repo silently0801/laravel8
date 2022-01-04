@@ -79,7 +79,7 @@
                                     <p>{{$item->name}}</p>
                                 </div>
                             </div>
-                            <div class="order-item-price" data-id="{{$item->id}}">
+                            <div class="order-item-price item" data-id="{{$item->id}}">
                                 <button class="minus" type="button">-</button>
                                 <input class="qty" type="number" value="{{$item->quantity}}">
                                 <button class="plus" type="button">+</button>
@@ -92,16 +92,16 @@
                 <div class="cart-footer">
                     <div class="d-flex flex-column  align-items-end mt-4 pt-4">
                         <div class="w-25 d-flex justify-content-between align-items-center">
-                            <span class="count">數量:</span><span class="count_price">3</span>
+                            <span>數量:</span><span class="count_price" id="qty">3</span>
                         </div>
                         <div class="w-25 d-flex justify-content-between align-items-center">
-                            <span class="subtotal">小計:</span><span class="subtotal_price">$24.90</span>
+                            <span>小計:</span><span class="subtotal_price" id="subtotal">$24.90</span>
                         </div>
                         <div class="w-25 d-flex justify-content-between align-items-center">
-                            <span class="freight">運費:</span><span class="freight_fee">$24.90</span>
+                            <span>運費:</span><span class="freight_fee" id="charge">-</span>
                         </div>
                         <div class="w-25 d-flex justify-content-between align-items-center">
-                            <span class="total">總計:</span><span class="total_price">$24.90</span>
+                            <span>總計:</span><span class="total_price" id="total">$24.90</span>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between mt-4 pt-4">
@@ -140,6 +140,7 @@
             if(item.quantity){
                 qtyElement.value = item.quantity;
                 itemTotalCalc(element);
+                orderTotalCalc();
             }
         });
     }
@@ -150,6 +151,27 @@
         let qty = qtyElement.value;
         let total = price * qty;
         priceElement.textContent = `\$${total.toLocaleString()}`;
+    }
+    function orderTotalCalc() {
+        const itemElements = document.querySelectorAll('.item');
+        const orderQtyElement = document.querySelector('#qty');
+        const orderSubtotalElement = document.querySelector('#subtotal');
+        const orderTotalElement = document.querySelector('#total');
+        let totalQty = 0;
+        let subtotal = 0;
+        let charge = 0;
+        let total = 0;
+        itemElements.forEach(function (itemElement) {
+            const qtyElement = itemElement.querySelector('.qty');
+            const priceElement = itemElement.querySelector('.item-total');
+            totalQty += Number(qtyElement.value);
+            subtotal += qtyElement.value * priceElement.getAttribute('data-single');
+        });
+        total = charge + subtotal;
+
+        orderQtyElement.textContent = totalQty;
+        orderSubtotalElement.textContent = `\$${subtotal.toLocaleString()}`;
+        orderTotalElement.textContent = `\$${total.toLocaleString()}`;
     }
     
     const minusElements = document.querySelectorAll('.minus');
@@ -165,5 +187,7 @@
             itemQtyCalc(this,1);
         });
     });
+
+    orderTotalCalc();
 </script>
 @endsection
