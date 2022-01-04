@@ -128,6 +128,8 @@
                 alert('加入成功');
             }
         });
+        
+
     });
 </script>
 @endsection

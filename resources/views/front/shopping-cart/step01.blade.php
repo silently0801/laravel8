@@ -79,7 +79,7 @@
                                     <p>{{$item->name}}</p>
                                 </div>
                             </div>
-                            <div class="order-item-price">
+                            <div class="order-item-price" data-id="{{$item->id}}">
                                 <button class="minus" type="button">-</button>
                                 <input class="qty" type="number" value="{{$item->quantity}}">
                                 <button class="plus" type="button">+</button>
@@ -119,9 +119,29 @@
 @section('js')
 <script>
     function itemQtyCalc(element,compute){
-        const qtyElement = element.parentElement.querySelector('.qty');
-        let answer = Number(qtyElement.value) + compute;
-        qtyElement.value = answer < 1 ? 1 : answer;
+        const itemElement = element.parentElement;
+        const qtyElement = itemElement.querySelector('.qty');
+        let productId = itemElement.getAttribute('data-id');
+        let qty = Number(qtyElement.value) + compute;
+        qty = qty < 1 ? 1 : qty;
+
+        let formData = new FormData();
+        formData.append('_token','{{csrf_token()}}');
+        formData.append('id',productId);
+        formData.append('qty',qty);
+
+        let url = '{{route('shopping-cart.update')}}';
+        fetch(url,{
+            'method':'post',
+            'body':formData
+        }).then(function (response) {
+            return response.json();
+        }).then(function (item) {
+            if(item.quantity){
+                qtyElement.value = item.quantity;
+                itemTotalCalc(element);
+            }
+        });
     }
     function itemTotalCalc(element) {
         const priceElement = element.parentElement.querySelector('.item-total');
@@ -131,19 +151,18 @@
         let total = price * qty;
         priceElement.textContent = `\$${total.toLocaleString()}`;
     }
+    
     const minusElements = document.querySelectorAll('.minus');
     const plusElements = document.querySelectorAll('.plus');
     minusElements.forEach(function (minusElement) {
         minusElement.addEventListener('click',function () {
             itemQtyCalc(this,-1);
-            itemTotalCalc(this);
         });
     });
 
     plusElements.forEach(function (plusElement) {
         plusElement.addEventListener('click',function () {
             itemQtyCalc(this,1);
-            itemTotalCalc(this);
         });
     });
 </script>

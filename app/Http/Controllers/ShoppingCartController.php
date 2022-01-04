@@ -25,6 +25,25 @@ class ShoppingCartController extends Controller
         return 'success';
     }
 
+    public function update(Request $request)
+    {
+        // 從資料庫中取得要更新的產品資料
+        $product = Product::find($request->id);
+
+        // 更新購物車
+        \Cart::update($product->id, array(
+            'quantity' => array(
+                'relative' => false,
+                'value' => $request->qty
+            ),
+        ));
+        // 取出購物車中該產品資料
+        $item = \Cart::get($product->id);
+        
+        // 返回該產品目前購物車內的數量
+        return $item;
+    }
+
     public function content()
     {
         dd(\Cart::getContent());
