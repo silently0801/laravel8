@@ -46,33 +46,31 @@
                         </div>
                     </div>
                 </div>
-                <form action="" class="container">
+                <form action="{{route('shopping-cart.step02-store')}}" method="post" class="container" id="step02-form">
+                    @csrf
                     <h3 class="fs-2">付款方式</h3>
                     <div class="form-group row py-2 px-4">
                         <div class="form-check">
-                            <input class="form-check-input m-r-3" type="radio" name="payment" id="credit-card">
+                            <input class="form-check-input m-r-3" type="radio" name="payment" id="credit-card" value="0" checked>
                             <label class="form-check-label fs-3" for="credit-card">信用卡付款</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input m-r-3" type="radio" name="payment" id="atm"
-                                checked>
+                            <input class="form-check-input m-r-3" type="radio" name="payment" id="atm" value="1">
                             <label class="form-check-label fs-3" for="atm">網路 ATM</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input m-r-3" type="radio" name="payment" id="cvs-code"
-                                checked>
+                            <input class="form-check-input m-r-3" type="radio" name="payment" id="cvs-code" value="2">
                             <label class="form-check-label fs-3" for="cvs-code">超商代碼</label>
                         </div>
                     </div>
                     <h3 class="fs-2">運送方式</h3>
                     <div class="form-group row py-2 px-4">
                         <div class="form-check">
-                            <input class="form-check-input m-r-3" type="radio" name="shipment" id="home">
+                            <input class="form-check-input m-r-3" type="radio" name="shipment" id="home" value="0" checked>
                             <label class="form-check-label fs-3" for="home">黑貓宅配</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input m-r-3" type="radio" name="shipment" id="cvs"
-                                checked>
+                            <input class="form-check-input m-r-3" type="radio" name="shipment" id="cvs" value="1">
                             <label class="form-check-label fs-3" for="cvs">超商店到店</label>
                         </div>
                     </div>
@@ -81,21 +79,21 @@
                 <div class="cart-footer">
                     <div class="d-flex flex-column  align-items-end mt-4 pt-4">
                         <div class="w-25 d-flex justify-content-between align-items-center">
-                            <span class="count">數量:</span><span class="count_price">3</span>
+                            <span class="count">數量:</span><span class="count_price">{{\Cart::getTotalQuantity()}}</span>
                         </div>
                         <div class="w-25 d-flex justify-content-between align-items-center">
-                            <span class="subtotal">小計:</span><span class="subtotal_price">$24.90</span>
+                            <span class="subtotal">小計:</span><span class="subtotal_price">${{number_format(\Cart::getSubTotal())}}</span>
                         </div>
                         <div class="w-25 d-flex justify-content-between align-items-center">
-                            <span class="freight">運費:</span><span class="freight_fee">$24.90</span>
+                            <span class="freight">運費:</span><span class="freight_fee">$60</span>
                         </div>
                         <div class="w-25 d-flex justify-content-between align-items-center">
-                            <span class="total">總計:</span><span class="total_price">$24.90</span>
+                            <span class="total">總計:</span><span class="total_price">${{number_format(\Cart::getTotal()+60)}}</span>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between mt-4 pt-4">
-                        <a href="./checkout1.html" class="btn btn-lg px-5 backStep_btn">上一步</a>
-                        <a href="./checkout3.html" class="btn btn-lg px-5 nextStep_btn">下一步</a>
+                        <a href="{{route('shopping-cart.step01')}}" class="btn btn-lg px-5 backStep_btn">上一步</a>
+                        <button class="btn btn-lg px-5 nextStep_btn" id="next">下一步</button>
                     </div>
                 </div>
             </div>
@@ -105,5 +103,10 @@
 @endsection
 
 @section('js')
-
+    <script>
+        const nextElement = document.querySelector('#next');
+        nextElement.addEventListener('click',function () {
+            document.querySelector('#step02-form').submit();
+        });
+    </script>
 @endsection

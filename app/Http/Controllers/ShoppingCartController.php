@@ -39,7 +39,7 @@ class ShoppingCartController extends Controller
         ));
         // 取出購物車中該產品資料
         $item = \Cart::get($product->id);
-        
+
         // 返回該產品目前購物車內的數量
         return $item;
     }
@@ -56,13 +56,25 @@ class ShoppingCartController extends Controller
     }
 
     public function step01()
-    {   
+    {
         $items = \Cart::getContent()->sortBy('id');
-        
-        return view('front.shopping-cart.step01',compact('items'));
+
+        return view('front.shopping-cart.step01', compact('items'));
     }
     public function step02()
-    {   
+    {
         return view('front.shopping-cart.step02');
+    }
+    public function step02Store(Request $request)
+    {
+        //payment 0:信用卡付款 1:網路 ATM 2:超商代碼
+        //shipment 0:黑貓宅配 1:超商店到店
+        session([
+            'payment' => $request->payment,
+            'shipment' => $request->shipment,
+        ]);
+        
+        dd(session()->all());
+        return redirect()->route('shopping-cart.step03');
     }
 }

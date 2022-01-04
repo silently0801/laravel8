@@ -98,7 +98,7 @@
                             <span>小計:</span><span class="subtotal_price" id="subtotal">$24.90</span>
                         </div>
                         <div class="w-25 d-flex justify-content-between align-items-center">
-                            <span>運費:</span><span class="freight_fee" id="charge">-</span>
+                            <span>運費:</span><span class="freight_fee" id="charge">$60</span>
                         </div>
                         <div class="w-25 d-flex justify-content-between align-items-center">
                             <span>總計:</span><span class="total_price" id="total">$24.90</span>
@@ -159,7 +159,7 @@
         const orderTotalElement = document.querySelector('#total');
         let totalQty = 0;
         let subtotal = 0;
-        let charge = 0;
+        let charge = 60;
         let total = 0;
         itemElements.forEach(function (itemElement) {
             const qtyElement = itemElement.querySelector('.qty');
