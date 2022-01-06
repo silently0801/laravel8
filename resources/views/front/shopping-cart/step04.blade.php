@@ -97,7 +97,7 @@
                     </div>
                 </div>
                 <!-- 購物車的footer -->
-                @include('front.shopping-cart.shoppinf-cart-footer',['step'=>4,'totalQty'=>$totalQty,'subtotal'=>$subtotal])
+                @include('front.shopping-cart.shopping-cart-footer',['step'=>4,'totalQty'=>$totalQty,'subtotal'=>$subtotal])
 
             </div>
         </div>

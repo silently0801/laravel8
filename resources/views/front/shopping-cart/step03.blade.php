@@ -42,7 +42,7 @@
                     </form>
                 </div>
                 <!-- 購物車的footer -->
-                @include('front.shopping-cart.shoppinf-cart-footer',['step'=>3])
+                @include('front.shopping-cart.shopping-cart-footer',['step'=>3])
             </div>
         </div>
     </div>

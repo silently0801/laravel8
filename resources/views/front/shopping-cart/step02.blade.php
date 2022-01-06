@@ -45,7 +45,7 @@
                     <button id="submit-btn" hidden></button>
                 </form>
                 <!-- 購物車的footer -->
-                @include('front.shopping-cart.shoppinf-cart-footer',['step'=>2])
+                @include('front.shopping-cart.shopping-cart-footer',['step'=>2])
             </div>
         </div>
     </div>
