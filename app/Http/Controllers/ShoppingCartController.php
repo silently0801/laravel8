@@ -46,15 +46,11 @@ class ShoppingCartController extends Controller
         return $item;
     }
 
-    public function content()
+    public function delete(Request $request)
     {
-        dd(\Cart::getContent());
-    }
+        \Cart::remove($request->id);
 
-    public function clear()
-    {
-        \Cart::clear();
-        return 'clear';
+        return 'success';
     }
 
     public function step01()

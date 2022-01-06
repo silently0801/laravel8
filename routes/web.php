@@ -47,17 +47,17 @@ Route::prefix('/shopping-cart')->group(function ()
 {
     Route::post('/add',[ShoppingCartController::class,'add'])->name('shopping-cart.add');
     Route::post('/update',[ShoppingCartController::class,'update'])->name('shopping-cart.update');
+    Route::post('/delete',[ShoppingCartController::class,'delete'])->name('shopping-cart.delete');
 
-    Route::get('/content',[ShoppingCartController::class,'content']);
-    Route::get('/clear',[ShoppingCartController::class,'clear']);
-
-    Route::get('/step01',[ShoppingCartController::class,'step01'])->name('shopping-cart.step01');
-    Route::get('/step02',[ShoppingCartController::class,'step02'])->name('shopping-cart.step02');
-    Route::post('/step02',[ShoppingCartController::class,'step02Store'])->name('shopping-cart.step02-store');
-    Route::get('/step03',[ShoppingCartController::class,'step03'])->name('shopping-cart.step03');
-    Route::post('/step03',[ShoppingCartController::class,'step03Store'])->name('shopping-cart.step03-store');
+    Route::middleware(['cart.check'])->group(function ()
+    {
+        Route::get('/step01',[ShoppingCartController::class,'step01'])->name('shopping-cart.step01');
+        Route::get('/step02',[ShoppingCartController::class,'step02'])->name('shopping-cart.step02');
+        Route::post('/step02',[ShoppingCartController::class,'step02Store'])->name('shopping-cart.step02-store');
+        Route::get('/step03',[ShoppingCartController::class,'step03'])->name('shopping-cart.step03');
+        Route::post('/step03',[ShoppingCartController::class,'step03Store'])->name('shopping-cart.step03-store');
+    });
     Route::get('/step04/{order_no}',[ShoppingCartController::class,'step04'])->name('shopping-cart.step04');
-
 });
 
 Auth::routes();

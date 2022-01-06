@@ -2,6 +2,7 @@
 @section('title','確認購物車')
 
 @section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.3.3/sweetalert2.min.css">
 <link rel="stylesheet" href="{{asset('css/checkout.css')}}">
 <style>
     body {
@@ -28,6 +29,11 @@
         width: 65px !important;
         text-align: center;
     }
+
+    .delete-btn {
+        margin-right: 10px;
+        cursor: pointer;
+    }
 </style>
 @endsection
 
@@ -44,6 +50,7 @@
                     @foreach ($items as $item)
                     <div class="d-flex justify-content-between align-items-center mt-4 pt-4 order-item">
                         <div class="d-flex align-items-center order-item-info">
+                            <div class="delete-btn" data-id="{{$item->id}}">X</div>
                             <div class="img"
                                 style="background-image: url('{{Storage::url($item->attributes->image_url)}}')"></div>
                             <div>
@@ -69,6 +76,8 @@
 @endsection
 
 @section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.3.3/sweetalert2.all.min.js" integrity="sha512-ZDaLH0jZny06ANbDr8eXL5xZJb3QwAiWIT1YJcQ3hdMeqv1LC+dwwD2484mqNa6mo1nb10EopYnWcGrPG244kg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script>
     function itemQtyCalc(element,compute){
         const itemElement = element.parentElement;
@@ -128,6 +137,7 @@
     
     const minusElements = document.querySelectorAll('.minus');
     const plusElements = document.querySelectorAll('.plus');
+    const deleteElements = document.querySelectorAll('.delete-btn');
     minusElements.forEach(function (minusElement) {
         minusElement.addEventListener('click',function () {
             itemQtyCalc(this,-1);
@@ -137,6 +147,46 @@
     plusElements.forEach(function (plusElement) {
         plusElement.addEventListener('click',function () {
             itemQtyCalc(this,1);
+        });
+    });
+
+    deleteElements.forEach(function (deleteElement) {
+        deleteElement.addEventListener('click',function () {
+            Swal.fire({
+                title: '是否刪除該商品?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '是',
+                cancelButtonText: '否',
+            }).then((result) => {
+                if(result.isConfirmed){
+                    let productId = this.getAttribute('data-id');
+                    let deleteBtn = this;
+                    let formData = new FormData();
+
+                    formData.append('_token','{{csrf_token()}}');
+                    formData.append('id',productId);
+
+                    let url = '{{route('shopping-cart.delete')}}';
+                    fetch(url,{
+                        'method':'post',
+                        'body':formData
+                    }).then(function (response) {
+                        return response.text();
+                    }).then(function (data) {
+                        if(data == 'success'){
+                            deleteBtn.parentElement.parentElement.remove();
+                            orderTotalCalc();
+                            Swal.fire(
+                                '刪除成功!'
+                            )
+                        }
+                    });
+                }
+            })
+            
         });
     });
 

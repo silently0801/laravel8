@@ -2,6 +2,7 @@
 @section('title','產品列表')
 
 @section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.3.3/sweetalert2.min.css">
 <link rel="stylesheet" href="{{asset('/css/product-list.css')}}">
 @endsection
 
@@ -42,5 +43,13 @@
 @endsection
 
 @section('js')
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.3.3/sweetalert2.all.min.js" integrity="sha512-ZDaLH0jZny06ANbDr8eXL5xZJb3QwAiWIT1YJcQ3hdMeqv1LC+dwwD2484mqNa6mo1nb10EopYnWcGrPG244kg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    @if (session('message'))
+        Swal.fire({
+            icon: 'error',
+            title: '{{session('message')}}',
+        })
+    @endif  
+</script>
 @endsection
