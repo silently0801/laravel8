@@ -74,7 +74,10 @@ class ShoppingCartController extends Controller
             'shipment' => $request->shipment,
         ]);
         
-        dd(session()->all());
         return redirect()->route('shopping-cart.step03');
+    }
+    public function step03()
+    {
+        return view('front.shopping-cart.step03');
     }
 }
