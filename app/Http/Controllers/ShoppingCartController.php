@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -73,11 +75,43 @@ class ShoppingCartController extends Controller
             'payment' => $request->payment,
             'shipment' => $request->shipment,
         ]);
-        
+
         return redirect()->route('shopping-cart.step03');
     }
     public function step03()
     {
         return view('front.shopping-cart.step03');
+    }
+    public function step03Store(Request $request)
+    {
+        $order = Order::create([
+            'order_no'=>'DP'.time(),
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'address' => $request->address,
+            'payment' => session('payment'),
+            'shipment' => session('shipment'),
+        ]);
+
+        $items = \Cart::getContent();
+        foreach ($items as  $item) {
+            $product = Product::find($item->id);
+            OrderDetail::create([
+                'order_id' => $order->id,
+                'product_id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->price,
+                'qty' => $item->quantity,
+                'image_url' => $product->image_url,
+            ]);
+        }
+        \Cart::clear();
+        return redirect()->route('shopping-cart.step04',['order_no'=>$order->order_no]);
+    }
+    public function step04($orderNo)
+    {
+        $order = Order::with('orderDetails')->where('order_no',$orderNo)->first();
+        return view('front.shopping-cart.step04',compact('order'));
     }
 }

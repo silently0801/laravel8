@@ -15,33 +15,30 @@
                 @include('front.shopping-cart.shopping-cart-header',['step'=>3])
                 <!-- 寄送資料 -->
                 <div class="mt-4 pt-4">
-                    <form action="" class="paymentMethod_form-group">
+                    <form action="{{route('shopping-cart.step03-store')}}" method="post" id="step03-form" class="paymentMethod_form-group">
+                        @csrf
                         <fieldset>
                             <legend>寄送資料</legend>
                             <div class="form-group">
                                 <label for="name">姓名</label>
-                                <input type="text" class="form-control" id="name" aria-describedby="emailHelp"
-                                    placeholder="王小明">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="王小明" required>
                             </div>
                             <div class="form-group">
-                                <label for="phoneNumber">電話</label>
-                                <input type="tel" class="form-control" id="phoneNumber" placeholder="0912345678">
+                                <label for="phone">電話</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="0912345678" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="abc123@gmail.com">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="abc123@gmail.com" required>
                             </div>
                             <div class="form-group">
-                                <label for="city">地址</label>
+                                <label for="address">地址</label>
                                 <div class="d-flex flex-column">
-                                    <div class="d-flex">
-                                        <input type="text" class="form-control mr-2 mb-2" id="city" placeholder="城市">
-                                        <input type="text" class="form-control mb-2" id="zipCode" placeholder="郵遞區號">
-                                    </div>
-                                    <input type="text" class="form-control" id="address" placeholder="地址">
+                                    <input type="text" class="form-control" id="address" name="address" placeholder="地址" required>
                                 </div>
                             </div>
                         </fieldset>
+                        <button id="submit-btn" hidden></button>
                     </form>
                 </div>
                 <!-- 購物車的footer -->
@@ -53,5 +50,10 @@
 @endsection
 
 @section('js')
-
+    <script>
+        const nextElement = document.querySelector('#next');
+        nextElement.addEventListener('click',function () {
+            document.querySelector('#submit-btn').click();
+        });
+    </script>
 @endsection

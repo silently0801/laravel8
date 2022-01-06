@@ -27,7 +27,7 @@
             <span>填寫資料</span>
         </div>
         <div class="d-flex flex-column align-items-center w-25  position-relative">
-            <div class="d-flex justify-content-center align-items-center step" @if($step >= 4)active @endif>4</div>
+            <div class="d-flex justify-content-center align-items-center step @if($step >= 4)active @endif">4</div>
             <span>完成訂購</span>
         </div>
     </div>

@@ -42,6 +42,7 @@
                             <label class="form-check-label fs-3" for="cvs">超商店到店</label>
                         </div>
                     </div>
+                    <button id="submit-btn" hidden></button>
                 </form>
                 <!-- 購物車的footer -->
                 @include('front.shopping-cart.shoppinf-cart-footer',['step'=>2])
@@ -52,10 +53,10 @@
 @endsection
 
 @section('js')
-    <script>
-        const nextElement = document.querySelector('#next');
-        nextElement.addEventListener('click',function () {
-            document.querySelector('#step02-form').submit();
-        });
-    </script>
+<script>
+    const nextElement = document.querySelector('#next');
+    nextElement.addEventListener('click',function () {
+        document.querySelector('#submit-btn').click();
+    });
+</script>
 @endsection
