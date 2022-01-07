@@ -3,12 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\OrderDetail;
 use App\Models\Product;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
+use TsaiYiHua\ECPay\Checkout;
+use TsaiYiHua\ECPay\Services\StringService;
+use TsaiYiHua\ECPay\Collections\CheckoutResponseCollection;
 
 class ShoppingCartController extends Controller
 {
+    public function __construct(Checkout $checkout,CheckoutResponseCollection $checkoutResponse)
+    {
+        $this->checkout = $checkout;
+        $this->checkoutResponse = $checkoutResponse;
+    }
+
     public function add(Request $request)
     {
         // 取得要加入購物車的產品資訊
@@ -91,6 +100,7 @@ class ShoppingCartController extends Controller
         ]);
 
         $items = \Cart::getContent();
+        $itemInfo=[];
         foreach ($items as  $item) {
             $product = Product::find($item->id);
             OrderDetail::create([
@@ -101,13 +111,80 @@ class ShoppingCartController extends Controller
                 'qty' => $item->quantity,
                 'image_url' => $product->image_url,
             ]);
+
+            $new_ary = [
+                'name' => $product->name,
+                'qty' => $item->quantity,
+                'price' => $product->price,
+                'unit' => '個'
+            ];
+
+            array_push($itemInfo, $new_ary);
         }
+        $new_ary = [
+            'name' => '運費',
+            'qty' => 1,
+            'price' => 60,
+            'unit' => '個'
+        ];
+        array_push($itemInfo, $new_ary);
+        
+        //第三方支付
+        $formData = [
+            'UserId' => 1, // 用戶ID , Optional
+            'ItemDescription' => '產品簡介',
+            'Items' => $itemInfo,
+            'OrderId' => $order->order_no,
+            'PaymentMethod' => 'Credit', // ALL, Credit, ATM, WebATM
+        ];
+
+        //清空購物車
         \Cart::clear();
-        return redirect()->route('shopping-cart.step04',['order_no'=>$order->order_no]);
+        
+        return $this->checkout->setNotifyUrl(route('notify'))->setReturnUrl(route('return'))->setPostData($formData)->send();
     }
     public function step04($orderNo)
     {
         $order = Order::with('orderDetails')->where('order_no',$orderNo)->first();
         return view('front.shopping-cart.step04',compact('order'));
+    }
+
+    public function notifyUrl(Request $request){
+        $serverPost = $request->post();
+        $checkMacValue = $request->post('CheckMacValue');
+        unset($serverPost['CheckMacValue']);
+        $checkCode = StringService::checkMacValueGenerator($serverPost);
+        if ($checkMacValue == $checkCode) {
+            $order = Order::where('order_no',$request->MerchantTradeNo)->first();
+            if($request->RtnCode == 1){
+                $order->update([
+                    'is_paid' => 1
+                ]);
+            }
+            return '1|OK';
+        } else {
+            return '0|FAIL';
+        }
+    }
+
+    public function returnUrl(Request $request){
+        $serverPost = $request->post();
+        $checkMacValue = $request->post('CheckMacValue');
+        unset($serverPost['CheckMacValue']);
+        $checkCode = StringService::checkMacValueGenerator($serverPost);
+        if ($checkMacValue == $checkCode) {
+            if (!empty($request->input('redirect'))) {
+                return redirect($request->input('redirect'));
+            } else {
+                //付款完成，下面接下來要將購物車訂單狀態改為已付款
+                $order = Order::where('order_no',$request->MerchantTradeNo)->first();
+                if($request->RtnCode == 1){
+                    $order->update([
+                        'is_paid' => 1
+                    ]);
+                }
+                return redirect()->route('shopping-cart.step04',['order_no'=>$request->MerchantTradeNo]);
+            }
+        }
     }
 }

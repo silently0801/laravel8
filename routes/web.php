@@ -60,6 +60,13 @@ Route::prefix('/shopping-cart')->group(function ()
     Route::get('/step04/{order_no}',[ShoppingCartController::class,'step04'])->name('shopping-cart.step04');
 });
 
+Route::prefix('/cart_ecpay')->group(function(){
+    //當消費者付款完成後，綠界會將付款結果參數以幕後(Server POST)回傳到該網址。
+    Route::post('/notify',[ShoppingCartController::class,'notifyUrl'])->name('notify');
+    //付款完成後，綠界會將付款結果參數以幕前(Client POST)回傳到該網址
+    Route::post('/return',[ShoppingCartController::class,'returnUrl'])->name('return');
+});
+
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 // 後台

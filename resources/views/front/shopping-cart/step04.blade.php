@@ -93,7 +93,25 @@
                             <label class="city">地址:</label>
                             <div class="checkout4_city infor_text">{{$order->address}}</div>
                         </div>
-
+                        
+                    </div>
+                    <div class="mt-4 pt-4 send_information">
+                        <h3>付款及運送方式</h3>
+                        @php
+                            use App\Models\Order;
+                        @endphp
+                        <div class="d-flex ml-2 mt-2 pt-3">
+                            <label class="city">付款方式:</label>
+                            <div class="checkout4_city infor_text">{{Order::PAYMENT[$order->payment]}}</div>
+                        </div>
+                        <div class="d-flex ml-2 mt-2 pt-3">
+                            <label class="city">付款狀態:</label>
+                            <div class="checkout4_city infor_text">{{Order::ISPAID[$order->is_paid]}}</div>
+                        </div>
+                        <div class="d-flex ml-2 mt-2 pt-3">
+                            <label class="city">運送方式:</label>
+                            <div class="checkout4_city infor_text">{{Order::SHIPMENT[$order->shipment]}}</div>
+                        </div>
                     </div>
                 </div>
                 <!-- 購物車的footer -->
