@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
             $table->longText('address');
             $table->integer('payment');
             $table->integer('shipment');
+            $table->integer('is_paid')->default(0);
             $table->timestamps();
         });
     }
